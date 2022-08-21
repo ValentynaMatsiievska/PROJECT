@@ -1,0 +1,265 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Exact weather</title>
+    <style>
+    #block1, #block2 {
+    float: left;
+    display: block;
+    width: 400px;
+    height: 400px;
+    margin: 20px;
+    }
+    .find {
+    float: left;
+    display: block; 
+    position: fixed;
+    margin-top: 350pt; 
+    }
+    ul.days1, ul.temperature1 {
+    margin: 0;
+    padding: 4px;
+    }
+    ul.days1 li, ul.temperature1 li, ul.emodji1 li {
+    display: inline; 
+    margin-right: 5px; 
+    padding: 3px;
+    }
+   ul.emodji1 {
+    margin: 0;
+    padding-top: 10px;
+    padding-left: 8px;
+    }
+   ul.emodji1 li {
+    margin-right: 13px; 
+    padding-left: 10px;
+    padding-right: 2px;
+    padding-top: 10px;
+   }
+   ul.temperature1 {
+    margin-right: 7px; 
+    padding-left: 22px;
+    padding-top: 10px;
+    font-size: 20px;
+   }
+   h1 {
+    color: #1a844d;
+    background-color:  rgb(222, 253, 243);
+    background-size: auto;
+    opacity: 0,9; 
+    font-size: 48px;
+    text-align: left;
+    font-weight: thin;
+    margin-top: 15pt;
+    margin-right: 920pt;
+    margin-left: 70pt;
+    padding: 7px;
+    font-family: fantasy;
+    letter-spacing: 5px;
+    }
+    h2 {
+    color: #010c06; 
+    font-size: 36px;
+    text-align: center;
+   }
+   h3 {
+    color: #1a844d;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+   }
+   .another {
+    color: rgb(38, 38, 217)
+   }
+   .cities{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color:rgb(38, 38, 217)
+   }
+   .maincity {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+   }
+   .days1, .emodji1, .temperature1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+   text-align: center;
+   font-size: 24px;}
+   .days1 {
+    color: #1a844d;
+    font-weight: bold;
+   }
+   .button, button {
+    border: 1px solid black;
+    color: rgb(20, 17, 17);
+    background: rgb(209, 209, 210);
+    font-size: 15px;
+    width: 130px;
+    height: 40px;
+    padding: auto; 
+    transition: all 200 ms ease-in-out;
+    border-radius: 5px;
+    margin-bottom: 16px;
+    }
+    .button:hover {
+    color: rgb(59, 59, 200);
+    background: white;
+    }
+    main {
+    width: 70px;
+    height: 50px;   
+    }
+    .string {
+    width: 450px;
+    height: 39px;  
+    text-align: left;
+    font-weight: bold;  
+    font-size: 15px;
+    margin-left: 100px;
+    font-family: 'Times New Roman', Times, serif;
+    }
+    </style>
+    </head>
+    <body>  
+    <h1>
+    Exact weather
+    </h1>
+    <div id="block1">
+    <div class="cities">
+    <h2>
+     Popular cities:   
+    </h2>
+    <p>
+    Paris
+    <br>
+    <br> 
+    London
+    <br>
+    <br>
+    Rome
+    <br> 
+    <br>
+    Madrid
+    <br>
+    <br>
+    New-York
+    </p> 
+    </div>
+    </div>
+    <div id="block2">
+    <div class="today">
+    <h2 class="another">
+    Weather today in:</h2>   </div>
+    <div class="maincity">
+    <h3 id = "city"> Tallinn</h3>
+     <h4> Sunday 18:00 </h4>
+     <h5 id = "maintemperature">    Clear 28°C </h5>
+    <button class="more">
+    More 
+    </button>
+    </div>
+    <div class="days">
+     <ul class="days1">
+    <li>
+     Mon   
+    </li>
+     <li>
+    Tue
+     </li>
+    <li>
+    Wed
+    </li>
+    <li>
+     Thu   
+    </li>
+    <li>
+     Fri   
+    </li>
+     </ul>
+    </div>
+    <div class="emodji">
+    <ul class="emodji1">
+    <li>
+        &#127774 
+    </li>    
+    <li>
+        &#127774
+    </li>
+    <li>
+        &#127780
+    </li>
+    <li>
+        &#127780
+    </li>
+    <li>
+        &#127780
+    </li>
+    </ul>
+    </div>
+    <div class="temperature">
+     <ul class="temperature1">
+     <li>
+        28°C
+     </li> 
+     <li>
+        29°C
+     </li>
+     <li>
+        26°C
+     </li> 
+     <li>
+        26°C
+     </li> 
+     <li>
+        26°C
+     </li>
+     </ul>   
+    </div>
+    </div>
+    </div>
+    <div class="find">
+<form action="" method="get" class = "search-form" id = "search-form">
+<input class = "string" type="search"placeholder="Looking for the weather anywhere" style="main" autocomplete="off" autofocus ="on" id = "city-input">
+<input type = "submit" value = "Find" class = "button" id = "city">
+<input type = "submit" value = "Current city" class = "button"> 
+</form>
+</div>
+<script>
+let now = new Date ();
+let h4 = document.querySelector ("h4");
+let date = now.getDate();
+let hours = now.getHours();
+let minutes = now.getMinutes();
+let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thuersday", "Friday", "Saturday"];
+let day = days [now.getDay()];
+h4.innerHTML = day + " " + hours + ":" + minutes;
+function search (event) {
+event.preventDefault();
+let apiKey = "f4b1afad08e0c84c66913649d9143761";
+let cityElement = document.querySelector ("#city-input").value;
+let cityInput = document.querySelector ("#city-input");
+cityElement.innerHTML = cityInput.value;
+let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Tallinn&appid=f4b1afad08e0c84c66913649d9143761&units=metric";
+axios.get(apiUrl).then(displayWeatherCondition);
+}
+function displayWeatherCondition (response) {
+document.querySelector ("#city").innerHTML = response.data.name;  
+document.querySelector ("#maintemperature").innerHTML = Math.round (response.data.main.temp)+ " °C"; 
+let description = document.querySelector ("#maintemperature-description")
+}
+let searchForm = document.querySelector ("#search-form")  
+searchForm.addEventListener ("submit", search)
+function showTemperature (response) {
+document.querySelector ("#city").innerHTML = response.data.name;
+document.querySelector ("#maintemperature").innerHTML = Math.round (responce.data.main.temp);
+}
+{ "require("@babel/core").transformSync("code", {
+    presets: ["@babel/preset-react"],}
+</script>
+</body>
+</html>
