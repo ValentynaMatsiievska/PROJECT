@@ -4,7 +4,135 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" /> 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel = "stylesheets" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-gg0yR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="Future-project.css" type="text/css"/>
+   <style>  
+.container {
+   max-width: 900px; 
+   max-height: 900px;  
+}
+.container1, .container2 {
+   float: left;
+   display: block;
+   width: 400px;
+   height: 400px;
+   margin-left: 10pt;
+   margin-top: 0;
+   }
+   .find {
+   float: left;
+   display: block; 
+   position: fixed;
+   margin-top: 350pt; 
+   }
+   ul.days1, ul.temperature1 {
+   margin: 0;
+   padding: 4px;
+   }
+   ul.days1 li, ul.temperature1 li, ul.emodji1 li {
+   display: inline; 
+   margin-right: 5px; 
+   padding: 3px;
+   }
+  ul.emodji1 {
+   margin: 0;
+   padding-top: 10px;
+   padding-left: 8px;
+   }
+  ul.emodji1 li {
+   margin-right: 13px; 
+   padding-left: 10px;
+   padding-right: 2px;
+   padding-top: 10px;
+  }
+  ul.temperature1 {
+   margin-right: 7px; 
+   padding-left: 22px;
+   padding-top: 10px;
+   font-size: 20px;
+  }
+  h1 {
+   color: #1a844d;
+   background-color:  rgb(222, 253, 243);
+   background-size: auto;
+   opacity: 0,9; 
+   font-size: 48px;
+   text-align: left;
+   font-weight: thin;
+   margin-left: 70pt;
+   padding: 7px;
+   font-family: fantasy;
+   letter-spacing: 5px;
+   }
+   h2 {
+   color: #010c06; 
+   font-size: 36px;
+   text-align: center;
+  }
+  h3 {
+   color: #1a844d;
+   font-size: 30px;
+   text-align: center;
+   font-weight: bold;
+  }
+  .weather-description {
+   font-size: 25px;
+   text-align: center;
+   font-weight: bold;}
+  .cities{
+   text-align: center;
+   font-size: 24px;
+   font-weight: bold;
+   color:rgb(38, 38, 217)
+  }
+  .maincity {
+   text-align: center;
+   font-size: 24px;
+   font-weight: bold;
+  }
+  .days1, .emodji1, .temperature1 {
+   margin-top: 15px;
+   margin-bottom: 15px;
+  text-align: center;
+  font-size: 24px;}
+  .days1 {
+   color: #1a844d;
+   font-weight: bold;
+  }
+  .button, button {
+   border: 1px solid black;
+   color: rgb(20, 17, 17);
+   background: rgb(209, 209, 210);
+   font-size: 15px;
+   width: 110px;
+   height: 40px;
+   padding: auto; 
+   transition: all 200 ms ease-in-out;
+   border-radius: 5px;
+   margin-bottom: 16px;
+   }
+   .button:hover {
+   color: rgb(59, 59, 200);
+   background: white;
+   }
+   main {
+   width: 70px;
+   height: 50px;   
+   }
+   .string {
+   width: 450px;
+   height: 39px;  
+   text-align: left;
+   font-weight: bold;  
+   font-size: 15px;
+   margin-left: 100px;
+   margin-top: 96px;
+   font-family: 'Times New Roman', Times, serif;
+   }
+   .path {
+      display: block;
+      margin-top: 50px;
+      margin-left: 100px;  
+      }
+     </style>
     <title>Exact weather</title>
 </head>
         <body> 
@@ -140,7 +268,69 @@
              and  <a href = "https://app.netlify.com/sites/exactweather/overview">hosted on Netlify</a></p> 
             </div>
             </div>
-<script src="Future-project.js"></script>
+<script>
+  
+let now = new Date ();
+let h4 = document.querySelector ("h4");
+let date = now.getDate();
+let hours = now.getHours();
+let minutes = now.getMinutes();
+let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thuersday", "Friday", "Saturday"];
+let day = days [now.getDay()];
+h4.innerHTML = day + " " + hours + ":" + minutes;
+if (hours< 10) {
+h4.innerHTML = day + " " + "0"+ hours + ":" + minutes;
+}
+if (minutes < 10) {
+    h4.innerHTML = day + " " +  hours + ":" + "0"+ minutes;
+    }
+let searchForm = document.querySelector ("#search-form")  
+searchForm.addEventListener ("submit", search)
+function displayWeatherCondition (response) {
+document.querySelector ("#city").innerHTML = response.data.name; 
+document.querySelector ("#maintemperature").innerHTML = Math.round (response.data.main.temp); 
+document.querySelector ("#humidity").innerHTML = response.data.main.humidity;  
+document.querySelector ("#wind").innerHTML = Math.round(response.data.wind.speed);
+document.querySelector ("#description").innerHTML = response.data.weather[0].main;  
+celsiusTemperature = response.data.main.temp;
+let iconElement = document.querySelector("#icon");
+iconElement.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+iconElement.setAttribute ("alt", response.data.weather[0].main)
+}
+function search(event) {
+event.preventDefault ();
+let apiKey = "c224c09e7e6870befba06c4b2e769168";
+let city = document.querySelector ("#city-input").value;
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+axios.get(apiUrl).then(displayWeatherCondition);
+}
+
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#maintemperature");
+
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheiTemperature);
+}
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  let temperatureElement = document.querySelector("#maintemperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);               
+                  </script>
 </body>
 </div>
 </html>
